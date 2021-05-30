@@ -13,9 +13,9 @@ import java.io.Serializable;
  */
 public class Login implements Serializable{
     private Usuario usuario;
-    private String clave;
+    private int clave;
 
-    public Login(Usuario usuario, String clave) {
+    public Login(Usuario usuario, int clave) {
         this.usuario = usuario;
         this.clave = clave;
     }
@@ -28,11 +28,11 @@ public class Login implements Serializable{
         this.usuario = usuario;
     }
 
-    public String getClave() {
+    public int getClave() {
         return clave;
     }
 
-    public void setClave(String clave) {
+    public void setClave(int clave) {
         this.clave = clave;
     }
 

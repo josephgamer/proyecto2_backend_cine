@@ -11,7 +11,7 @@ import cr.ac.una.db.dao.crud.AbstractCRUD;
  *
  * @author Esteban
  */
-public class PeliculaDAO extends AbstractCRUD{
+public class PeliculaCRUD extends AbstractCRUD{
 
     @Override
     public String getListAllCmd() {
