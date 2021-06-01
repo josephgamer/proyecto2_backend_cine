@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import modelo.beans.Login;
+import modelo.beans.Usuario;
 import modelo.dao.crud.LoginCRUD;
 
 /**
@@ -24,7 +25,12 @@ public class LoginDAO extends AbsLoginDAO<Integer, Login> {
     
     @Override
     public Login getRecord(ResultSet rs) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Login login = new Login();
+        Usuario user = new Usuario();
+        user.setIdUsuario(rs.getString("usuario_id"));
+        login.setClave(rs.getInt("clave"));
+        login.setUsuario(user);
+        return login;
     }
 
     @Override

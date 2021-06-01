@@ -19,6 +19,11 @@ public class Login implements Serializable{
         this.usuario = usuario;
         this.clave = clave;
     }
+    
+    public Login() {
+        this.clave = 0;
+        this.usuario = new Usuario();
+    }
 
     public Usuario getUsuario() {
         return usuario;

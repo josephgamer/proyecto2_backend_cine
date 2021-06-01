@@ -15,7 +15,7 @@ public class LoginCRUD extends AbstractCRUD{
 
     @Override
     public String getListAllCmd() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return LIST_ALL;
     }
 
     @Override
@@ -40,5 +40,8 @@ public class LoginCRUD extends AbstractCRUD{
     
     protected static final String ADD_LOGIN = "insert into login(clave,usuario_id)"
             + " values(?, ?);";
+    
+    protected static final String LIST_ALL = "select clave,usuario_id"
+            + " from login;";
     
 }
