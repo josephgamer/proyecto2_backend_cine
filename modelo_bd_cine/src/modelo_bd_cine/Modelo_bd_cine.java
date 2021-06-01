@@ -5,6 +5,10 @@
  */
 package modelo_bd_cine;
 
+import cr.ac.una.db.Database;
+import modelo.dao.MaxHorarioBD;
+import modelo.dao.MaxHorarioDAO;
+
 /**
  *
  * @author Esteban
@@ -15,7 +19,29 @@ public class Modelo_bd_cine {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        try {
+            Database db = new MaxHorarioBD() {
+            };
+            System.out.println(db);
+
+            //DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            //ProfesorDAO bd = new ProfesorDAO();
+            //MatriculaDAO bd = new MatriculaDAO();
+            //Matricula value = new Matricula();
+            //Estudiante e = new Estudiante();
+            //e.setId_estudiante(122223333);
+            //value.setEstudiante_id(e);
+            //System.out.println(bd.listAll().size());
+            //mostrarListaCursos(bd);
+            /*EspecialidadDAO bd = new EspecialidadDAO();
+            ConjuntoEspecialidad ce = new ConjuntoEspecialidad();
+            Profesor p = new Profesor();
+            p.setId_profesor(4567);*/
+            MaxHorarioDAO bd = new MaxHorarioDAO();
+            System.out.println(bd.listAll().get(0));
+        } catch (Exception ex) {
+            System.err.printf("Excepción: '%s'%n", ex.getMessage());
+        }
     }
     
 }
