@@ -8,9 +8,13 @@ package modelo.beans;
 import java.io.IOException;
 import java.io.Serializable;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.xml.bind.JAXBException;
 import modelo.dao.SalaDAO;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 /**
  *
@@ -36,5 +40,22 @@ public class ConjuntoSala implements Serializable{
         } catch (IOException ex) {
             Logger.getLogger(ConjuntoSala.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public String datosJSON() throws JAXBException {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        return gson.toJson(allSalas());
+    }
+    
+    public List<Sala> allSalas() {
+        List<Sala> all = null;
+        try {
+            all = this.sala.listAll();
+        } catch (SQLException ex) {
+            Logger.getLogger(ConjuntoSala.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(ConjuntoSala.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return all;
     }
 }
