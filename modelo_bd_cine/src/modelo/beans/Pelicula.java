@@ -6,6 +6,7 @@
 package modelo.beans;
 
 import java.io.Serializable;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -15,6 +16,7 @@ public class Pelicula implements Serializable{
     private int numpelicula;
     private String descripcion;
     private byte[] imagen;
+    private ImageIcon foto = new ImageIcon();
 
     public Pelicula() {
         this.descripcion = "";
@@ -50,6 +52,14 @@ public class Pelicula implements Serializable{
 
     public void setImagen(byte[] imagen) {
         this.imagen = imagen;
+    }
+
+    public ImageIcon getFoto() {
+        return foto;
+    }
+
+    public void setFoto(ImageIcon foto) {
+        this.foto = foto;
     }
     
 }
