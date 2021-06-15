@@ -11,8 +11,10 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,7 +29,7 @@ import modelo.dao.PeliculaDAO;
  *
  * @author Esteban
  */
-public class ConjuntoPelicula {
+public class ConjuntoPelicula implements Serializable{
     
     private static final String PATRON_IMAGEN
             = "([^\\s]+(\\.(?i)(jpg|png|gif|bmp))$)";
@@ -56,7 +58,7 @@ public class ConjuntoPelicula {
         List<Pelicula> result = null;
         List<Pelicula> pelis = new ArrayList<>();
         try {
-            result = this.pelicula.listAll();
+            result = pelicula.listAll();
             for (Pelicula peli : result) {
                 byte[] bi = peli.getImagen();
                     BufferedImage image = null;
@@ -78,6 +80,61 @@ public class ConjuntoPelicula {
     public String datosJSON() throws JAXBException {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         return gson.toJson(listarPelis());
+    }
+    
+    public Pelicula retrievePelicula(int id) {
+        Pelicula r = null;
+        try {
+            r = this.pelicula.retrieve(id);
+        } catch (SQLException ex) {
+            Logger.getLogger(ConjuntoPelicula.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(ConjuntoPelicula.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return r;
+    }
+    
+    public String getTablaGaleria(int imgsPorFila) throws SQLException, IOException {
+        System.out.printf("Construyendo tabla con %d imágenes por fila..%n", imgsPorFila);
+
+        StringBuilder r = new StringBuilder();
+        r.append("<table class=\"gallery\">");
+        r.append("<thead></thead>");
+        r.append("<tbody>");
+
+        r.append("<tr>");
+        int k = 0;
+        List<Pelicula> items = this.pelicula.listAll();
+        Iterator<Pelicula> i = items.iterator();
+        while (i.hasNext()) {
+            Pelicula item = i.next();
+            System.out.printf("Cargando imagen: %d (%s)%n", item.getNumpelicula());
+            r.append("<td class=\"thumb\">");
+            
+            // Observe que el método NO carga las imágenes directamente.
+            // En lugar de eso, el método genera el código HTML necesario para que el browser
+            // solicite el archivo correspondiente a través del Servlet, que envía los
+            // datos en el formato correcto.
+            r.append(String.format(
+                    "<p><img alt=\"%s\" src=\"ServicioProveedorImagen?numPelicula=%d\" /></p> ",
+                    item.getNumpelicula()));
+            
+            r.append("</td>");
+            k++;
+            if (((k % imgsPorFila) == 0) && i.hasNext()) {
+                r.append("</tr>\n<tr>");
+            }
+        }
+
+        r.append("</tr>");
+        r.append("</tbody>");
+        r.append("</table>");
+        return r.toString();
+    }
+
+    public static String getTablaGaleria(ConjuntoPelicula galeria, int imgsPorFila) throws SQLException, IOException {
+        return galeria.getTablaGaleria(imgsPorFila);
     }
     
     public static boolean validar(final String nombreArchivo) {

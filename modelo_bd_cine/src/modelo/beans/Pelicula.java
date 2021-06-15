@@ -5,6 +5,8 @@
  */
 package modelo.beans;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
 import javax.swing.ImageIcon;
 
@@ -12,11 +14,19 @@ import javax.swing.ImageIcon;
  *
  * @author Esteban
  */
-public class Pelicula implements Serializable{
+public class Pelicula implements Serializable {
+
     private int numpelicula;
     private String descripcion;
     private byte[] imagen;
     private ImageIcon foto = new ImageIcon();
+    private int tamano;
+    private InputStream entrada = new InputStream() {
+        @Override
+        public int read() throws IOException {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+    };
 
     public Pelicula() {
         this.descripcion = "";
@@ -61,5 +71,21 @@ public class Pelicula implements Serializable{
     public void setFoto(ImageIcon foto) {
         this.foto = foto;
     }
-    
+
+    public InputStream getEntrada() {
+        return entrada;
+    }
+
+    public void setEntrada(InputStream entrada) {
+        this.entrada = entrada;
+    }
+
+    public int getTamano() {
+        return tamano;
+    }
+
+    public void setTamano(int tamano) {
+        this.tamano = tamano;
+    }
+
 }

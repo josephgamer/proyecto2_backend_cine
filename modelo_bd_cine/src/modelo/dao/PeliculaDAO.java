@@ -27,13 +27,13 @@ public class PeliculaDAO extends AbsPeliculaDAO<Integer, Pelicula>{
         Pelicula pelicula = new Pelicula();
         pelicula.setDescripcion(rs.getString("nombre"));
         pelicula.setNumpelicula(rs.getInt("num_pelicula"));
-        pelicula.setImagen(rs.getBytes("foto"));
+        pelicula.setEntrada(rs.getBinaryStream("foto"));
         return pelicula;
     }
 
     @Override
     public void setAddParameters(PreparedStatement stm, Integer id, Pelicula value) throws SQLException {
-        stm.setBytes(1, value.getImagen());
+        stm.setBinaryStream(1, value.getEntrada(), value.getTamano());
         stm.setString(2, value.getDescripcion());
     }
 
@@ -42,5 +42,10 @@ public class PeliculaDAO extends AbsPeliculaDAO<Integer, Pelicula>{
         stm.setBytes(1, value.getImagen());
         stm.setString(2, value.getDescripcion());
         stm.setInt(3, id);
+    }
+
+    @Override
+    public void setIdParameter(PreparedStatement stm, Integer id) throws SQLException {
+        stm.setInt(1, id);
     }
 }

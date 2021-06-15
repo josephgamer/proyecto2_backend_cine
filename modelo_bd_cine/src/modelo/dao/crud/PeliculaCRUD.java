@@ -25,7 +25,7 @@ public class PeliculaCRUD extends AbstractCRUD{
 
     @Override
     public String getRetrieveCmd() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return RETRIEVE_CMD;
     }
 
     @Override
@@ -46,5 +46,9 @@ public class PeliculaCRUD extends AbstractCRUD{
     
     protected static final String UPDATE_PELICULA = 
             "update pelicula set foto = ?, nombre = ? where num_pelicula = ?;";
+    
+    protected static final String RETRIEVE_CMD
+            = "SELECT num_pelicula, foto, nombre "
+            + "FROM pelicula WHERE num_pelicula=?; ";
     
 }

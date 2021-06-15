@@ -8,6 +8,7 @@ package cr.ac.una.db.dao;
 import cr.ac.una.db.Database;
 import cr.ac.una.db.dao.crud.AbstractCRUD;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,6 +16,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import utilities.IOUtilities;
 
 /**
  *
@@ -56,7 +58,27 @@ public abstract class AbsPeliculaDAO<K, V> implements DAO <K, V> {
 
     @Override
     public V retrieve(K id) throws SQLException, IOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        V r = null;
+        try (Connection cnx = db.getConnection();
+                PreparedStatement stm = cnx.prepareStatement(getCRUD().getRetrieveCmd())) {
+            stm.clearParameters();
+            setIdParameter(stm, id);
+            try (ResultSet rs = stm.executeQuery()) {
+                if (rs.next()) {
+                    r = getRecord(rs);
+                    /*try (OutputStream out = response.getOutputStream()) {
+                        response.setContentType(r.getTipo());
+                        IOUtilities.copy(rs.getBinaryStream(4), out);
+                    } catch (IOException ex) {
+                        System.err.printf("Excepción: '%s'%n", ex.getMessage());
+                        throw ex;
+                    }*/
+                } else {
+                    throw new IllegalArgumentException();
+                }
+            }
+        }
+        return r;
     }
 
     @Override
@@ -83,6 +105,8 @@ public abstract class AbsPeliculaDAO<K, V> implements DAO <K, V> {
 
     public abstract void setUpdateParameters(PreparedStatement stm, K id, V value)
             throws SQLException;
+    
+    public abstract void setIdParameter(PreparedStatement stm, K id) throws SQLException;
     
     public AbstractCRUD getCRUD() {
         return crud;

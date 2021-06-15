@@ -6,8 +6,8 @@
 package modelo_bd_cine;
 
 import cr.ac.una.db.Database;
+import modelo.beans.ConjuntoPelicula;
 import modelo.dao.MaxHorarioBD;
-import modelo.dao.MaxHorarioDAO;
 
 /**
  *
@@ -37,8 +37,8 @@ public class Modelo_bd_cine {
             ConjuntoEspecialidad ce = new ConjuntoEspecialidad();
             Profesor p = new Profesor();
             p.setId_profesor(4567);*/
-            MaxHorarioDAO bd = new MaxHorarioDAO();
-            System.out.println(bd.listAll().get(0));
+            ConjuntoPelicula bd = new ConjuntoPelicula();
+            System.out.println(bd.listarPelis().size());
         } catch (Exception ex) {
             System.err.printf("Excepción: '%s'%n", ex.getMessage());
         }
