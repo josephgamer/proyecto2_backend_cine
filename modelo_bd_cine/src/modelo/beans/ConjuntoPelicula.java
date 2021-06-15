@@ -117,7 +117,7 @@ public class ConjuntoPelicula implements Serializable{
             // solicite el archivo correspondiente a través del Servlet, que envía los
             // datos en el formato correcto.
             r.append(String.format(
-                    "<p><img alt=\"%s\" src=\"ServicioProveedorImagen?numPelicula=%d\" /></p> ",
+                    "<p><img alt=\"%s\" src=\"VerPelis?numPelicula=%d\" /></p> ",
                     item.getNumpelicula()));
             
             r.append("</td>");
