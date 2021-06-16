@@ -46,5 +46,9 @@ public class ConjuntoUsuario implements Serializable {
         }
         return null;
     }
+    
+    public void agregar(Usuario usuario) throws SQLException, IOException {
+        user.add(usuario.getIdUsuario(), usuario);
+    }
 
 }
