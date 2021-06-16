@@ -59,7 +59,7 @@ public class ConjuntoPelicula implements Serializable{
         List<Pelicula> pelis = new ArrayList<>();
         try {
             result = pelicula.listAll();
-            for (Pelicula peli : result) {
+            /*for (Pelicula peli : result) {
                 byte[] bi = peli.getImagen();
                     BufferedImage image = null;
                     InputStream in = new ByteArrayInputStream(bi);
@@ -68,13 +68,13 @@ public class ConjuntoPelicula implements Serializable{
                     peli.setFoto(imgi);
                     pelis.add(peli);
 
-            }
+            }*/
         } catch (SQLException ex) {
             Logger.getLogger(ConjuntoPelicula.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(ConjuntoPelicula.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return pelis;
+        return result;
     }
     
     public String datosJSON() throws JAXBException {
@@ -109,7 +109,7 @@ public class ConjuntoPelicula implements Serializable{
         Iterator<Pelicula> i = items.iterator();
         while (i.hasNext()) {
             Pelicula item = i.next();
-            System.out.printf("Cargando imagen: %d (%s)%n", item.getNumpelicula());
+            System.out.printf("Cargando imagen: %d %n", item.getNumpelicula());
             r.append("<td class=\"thumb\">");
             
             // Observe que el método NO carga las imágenes directamente.
@@ -117,7 +117,7 @@ public class ConjuntoPelicula implements Serializable{
             // solicite el archivo correspondiente a través del Servlet, que envía los
             // datos en el formato correcto.
             r.append(String.format(
-                    "<p><img alt=\"%s\" src=\"VerPelis?numPelicula=%d\" /></p> ",
+                    "<p><img src=\"VerPelis?numPelicula=%d\" /></p> ",
                     item.getNumpelicula()));
             
             r.append("</td>");
