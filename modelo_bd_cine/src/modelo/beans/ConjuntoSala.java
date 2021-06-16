@@ -58,4 +58,16 @@ public class ConjuntoSala implements Serializable{
         }
         return all;
     }
+    
+    public String verSalas() {
+        StringBuilder r = new StringBuilder();
+        List<Sala> result = this.allSalas();
+        for (Sala s : result) {
+            r.append(String.format("\t\t\t<option size = '1' value = '%d'>\n", s.getNumSala()));
+            r.append(String.format(s.getTipo()));
+            r.append(String.format("\t\t\t</option>\n"));
+
+        }
+        return r.toString();
+    }
 }

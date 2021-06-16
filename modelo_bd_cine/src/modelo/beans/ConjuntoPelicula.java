@@ -56,19 +56,8 @@ public class ConjuntoPelicula implements Serializable{
     
     public List<Pelicula> listarPelis() {
         List<Pelicula> result = null;
-        List<Pelicula> pelis = new ArrayList<>();
         try {
             result = pelicula.listAll();
-            /*for (Pelicula peli : result) {
-                byte[] bi = peli.getImagen();
-                    BufferedImage image = null;
-                    InputStream in = new ByteArrayInputStream(bi);
-                    image = ImageIO.read(in);
-                    ImageIcon imgi = new ImageIcon(image.getScaledInstance(60, 60, 0));
-                    peli.setFoto(imgi);
-                    pelis.add(peli);
-
-            }*/
         } catch (SQLException ex) {
             Logger.getLogger(ConjuntoPelicula.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -135,6 +124,18 @@ public class ConjuntoPelicula implements Serializable{
 
     public static String getTablaGaleria(ConjuntoPelicula galeria, int imgsPorFila) throws SQLException, IOException {
         return galeria.getTablaGaleria(imgsPorFila);
+    }
+    
+    public String verNombresPelis() {
+        StringBuilder r = new StringBuilder();
+        List<Pelicula> result = this.listarPelis();
+        for (Pelicula s : result) {
+            r.append(String.format("\t\t\t<option size = '1' value = '%d'>\n", s.getNumpelicula()));
+            r.append(String.format(s.getDescripcion()));
+            r.append(String.format("\t\t\t</option>\n"));
+
+        }
+        return r.toString();
     }
     
     public static boolean validar(final String nombreArchivo) {
