@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package modelo.beans;
 
 import java.io.IOException;
@@ -46,4 +42,9 @@ public class ConjuntoLogin implements Serializable {
         }
         return false;
     }
+    
+     public void agregar(Login login) throws SQLException, IOException {
+        user.add(Integer.parseInt(login.getUsuario().getIdUsuario()), login);
+    }
+    
 }
