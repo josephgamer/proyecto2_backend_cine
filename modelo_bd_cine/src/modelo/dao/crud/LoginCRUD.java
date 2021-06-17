@@ -20,7 +20,7 @@ public class LoginCRUD extends AbstractCRUD{
 
     @Override
     public String getAddCmd() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return ADD_LOGIN;
     }
 
     @Override
