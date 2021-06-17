@@ -33,7 +33,7 @@ public class ProyeccionDAO extends AbsProyeccionDAO<Integer, Proyeccion>{
         Horario horario = new Horario();
         Sala sala = new Sala();
         pelicula.setDescripcion(rs.getString("nombre"));
-        pelicula.setImagen(rs.getBytes("foto"));
+        pelicula.setEntrada(rs.getBinaryStream("foto"));
         pelicula.setNumpelicula(rs.getInt("pelicula_num"));
         horario.setDia(rs.getDate("dia"));
         horario.setHora(rs.getInt("hora"));
