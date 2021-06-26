@@ -79,8 +79,10 @@ public class ConjuntoProyeccion implements Serializable{
             r.append(String.format("<p>Día: %s</p>", item.getHorario().getDia()));
             r.append(String.format("<p>Precio: %d</p>", item.getSala().getPrecio()));
             r.append(String.format("<p>Tipo Sala: %s</p>", item.getSala().getTipo()));
-            r.append(String.format("<p><button class = '%s' type='%s' onclick='%s'>%s</button></p>",
+            r.append(String.format("<p><button class = '%s' type='%s' onclick='%s' >%s</button></p>",
                     "btn","button","mostrar(4);","Butacas"));
+            r.append(String.format("<p><button class = '%s' type='%s' value = '%d' name = '%s'>%s</button></p>"
+                    , "btn","submit", item.getNumProyeccion(), "proyeccion","Comprar"));
             
             r.append("</td>");
             k++;

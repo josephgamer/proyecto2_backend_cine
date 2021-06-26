@@ -7,6 +7,7 @@ package modelo_bd_cine;
 
 import cr.ac.una.db.Database;
 import modelo.beans.ConjuntoPelicula;
+import modelo.beans.ConjuntoProyeccion;
 import modelo.dao.MaxHorarioBD;
 
 /**
@@ -37,8 +38,8 @@ public class Modelo_bd_cine {
             ConjuntoEspecialidad ce = new ConjuntoEspecialidad();
             Profesor p = new Profesor();
             p.setId_profesor(4567);*/
-            ConjuntoPelicula bd = new ConjuntoPelicula();
-            System.out.println(ConjuntoPelicula.getTablaGaleria(bd, 2));
+            ConjuntoProyeccion bd = new ConjuntoProyeccion();
+            System.out.println(bd.getTablaProyeccion(2));
         } catch (Exception ex) {
             System.err.printf("Excepción: '%s'%n", ex.getMessage());
         }
